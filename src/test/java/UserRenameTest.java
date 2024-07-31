@@ -50,7 +50,6 @@ public class UserRenameTest extends LinkTest{
                 .when()
                 .post("/api/auth/register");
         response.then().log().all();
-        String errorMessage = response.jsonPath().getString("message");
         RegUser regUser = gson.fromJson(response.getBody().asString(), RegUser.class);
         userRenameStep.UserRenameWithAuthStep(userRenameEmail, regUser);
         userCreated = true;
