@@ -12,9 +12,8 @@ import static io.restassured.RestAssured.given;
 
 public class GetUserOrdersTest extends LinkTest {
 
-    private RegUser regUser;
+
     private UsersReg userForOrder;
-    private String accessToken;
     private boolean userCreated;
 
 
@@ -29,7 +28,7 @@ public class GetUserOrdersTest extends LinkTest {
         if (userCreated) {
             String accessToken = UserOrdersStep.UserLoginStepTest(userForOrder);
             if (accessToken != null) {
-                UserOrdersStep.DeleteUser(userForOrder, regUser, accessToken);
+                UserOrdersStep.DeleteUser(userForOrder, accessToken);
             }
         }
     }
@@ -45,12 +44,12 @@ public class GetUserOrdersTest extends LinkTest {
         response.then().log().all();
         RegUser regUser = gson.fromJson(response.getBody().asString(), RegUser.class);
         String accessToken = regUser.getAccessToken();
-        GetUserOrdersStep.OrdersListWithAuth(regUser, accessToken);
+        GetUserOrdersStep.OrdersListWithAuth(accessToken);
         userCreated = true;
     }
 
     @Test
     public void OrderListWithoutAuthTest() {
-        GetUserOrdersStep.OrdersListWithoutAuth(regUser, accessToken);
+        GetUserOrdersStep.OrdersListWithoutAuth();
     }
 }

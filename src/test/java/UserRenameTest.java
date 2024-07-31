@@ -11,7 +11,6 @@ import static io.restassured.RestAssured.given;
 
 public class UserRenameTest extends LinkTest{
     private UsersReg userNewLogin;
-    private RegUser regUser;
     private UserRenameStep userRenameStep;
     private UsersReg userRenameEmail;
     private UsersReg userRenameName;
@@ -35,7 +34,7 @@ public class UserRenameTest extends LinkTest{
         if (userCreated) {
            String accessToken = userRenameStep.UserLoginStep(userNewLogin);
             if (accessToken != null) {
-                UserRenameStep.DeleteUser(userNewLogin,regUser,accessToken);
+                UserRenameStep.DeleteUser(userNewLogin,accessToken);
             }
         }
     }
@@ -57,17 +56,17 @@ public class UserRenameTest extends LinkTest{
 
     @Test
     public void UserRenameEmailWithoutAuthTest() {
-        userRenameStep.UserRenameWhithoutAuthStep(userRenameEmail, regUser);
+        userRenameStep.UserRenameWhithoutAuthStep(userRenameEmail);
     }
 
     @Test
     public void UserRenamePasswordWhithoutAuthTest() {
-        userRenameStep.UserRenameWhithoutAuthStep(userRenamePassword, regUser);
+        userRenameStep.UserRenameWhithoutAuthStep(userRenamePassword);
     }
 
     @Test
     public void UserRenameNameWhithoutAuthTest() {
-        userRenameStep.UserRenameWhithoutAuthStep(userRenameName, regUser);
+        userRenameStep.UserRenameWhithoutAuthStep(userRenameName);
     }
 
 }

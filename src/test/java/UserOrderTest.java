@@ -10,7 +10,6 @@ import static Steps.UserRegStep.gson;
 import static io.restassured.RestAssured.given;
 
 public class UserOrderTest extends LinkTest {
-    private RegUser regUser;
     private UsersReg userForOrder;
     private boolean userCreated;
 
@@ -26,7 +25,7 @@ public class UserOrderTest extends LinkTest {
         if (userCreated) {
             String accessToken = UserOrdersStep.UserLoginStepTest(userForOrder);
             if (accessToken != null) {
-                UserOrdersStep.DeleteUser(userForOrder, regUser, accessToken);
+                UserOrdersStep.DeleteUser(userForOrder, accessToken);
             }
         }
     }
@@ -42,7 +41,7 @@ public class UserOrderTest extends LinkTest {
         response.then().log().all();
         RegUser regUser = gson.fromJson(response.getBody().asString(), RegUser.class);
         String accessToken = regUser.getAccessToken();
-        UserOrdersStep.OrderWithAuth(regUser, accessToken);
+        UserOrdersStep.OrderWithAuth(accessToken);
         userCreated = true;
     }
 
@@ -62,7 +61,7 @@ public class UserOrderTest extends LinkTest {
         response.then().log().all();
         RegUser regUser = gson.fromJson(response.getBody().asString(), RegUser.class);
         String accessToken = regUser.getAccessToken();
-        UserOrdersStep.OrderWithAuthAndIngridients(regUser, accessToken);
+        UserOrdersStep.OrderWithAuthAndIngridients(accessToken);
         userCreated = true;
     }
 
@@ -77,7 +76,7 @@ public class UserOrderTest extends LinkTest {
         response.then().log().all();
         RegUser regUser = gson.fromJson(response.getBody().asString(), RegUser.class);
         String accessToken = regUser.getAccessToken();
-        UserOrdersStep.OrderWithoutIngridients(regUser, accessToken);
+        UserOrdersStep.OrderWithoutIngridients(accessToken);
         userCreated = true;
     }
     @Test
@@ -91,7 +90,7 @@ public class UserOrderTest extends LinkTest {
         response.then().log().all();
         RegUser regUser = gson.fromJson(response.getBody().asString(), RegUser.class);
         String accessToken = regUser.getAccessToken();
-        UserOrdersStep.OrderWithInvalidHash(regUser, accessToken);
+        UserOrdersStep.OrderWithInvalidHash(accessToken);
         userCreated = true;
     }
 }

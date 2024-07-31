@@ -15,14 +15,14 @@ public class UserRenameStep {
    /*private static RegUser regUser;*/
 
     @Step("Create User")
-    public void UserRegStep (UsersReg newUser, String errorMessage) {
+    public void UserRegStep (UsersReg newUser) {
         Response response = given()
                 .log().all()
                 .header("Content-type", "application/json")
                 .body(gson.toJson(newUser))
                 .when()
                 .post("/api/auth/register");
-        String errorMessage1 = response.jsonPath().getString("message");
+        String errorMessage = response.jsonPath().getString("message");
         RegUser regUser = gson.fromJson(response.getBody().asString(), RegUser.class);
         response.then().log().all()
                 .statusCode(200);
@@ -56,7 +56,7 @@ public class UserRenameStep {
     }
 
     @Step("rename User whithout auth")
-    public void UserRenameWhithoutAuthStep (UsersReg newUser, RegUser regUser) {
+    public void UserRenameWhithoutAuthStep (UsersReg newUser) {
         Response patch = given()
                 .log().all()
                 .header("Content-type", "application/json")
@@ -68,10 +68,7 @@ public class UserRenameStep {
     }
 
     @Step("Delete User")
-    public static void DeleteUser(UsersReg UsersReg, RegUser regUser, String accessToken) {
-        /*String errorMessage = response.jsonPath().getString("message");
-        RegUser regUser = gson.fromJson(response.getBody().asString(), RegUser.class);
-        String accessToken = regUser.getAccessToken().replace("Bearer ", "");*/
+    public static void DeleteUser(UsersReg UsersReg,String accessToken) {
         Response delete = given()
                 .log().all()
                 .header("Content-type", "application/json")

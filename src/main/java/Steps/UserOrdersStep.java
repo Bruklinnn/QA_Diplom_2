@@ -15,15 +15,15 @@ public class UserOrdersStep {
     private static final String ORDER_ENDPOINT = "/api/orders";
 
     @Step("Create User")
-    public static void UserRegStepTest (UsersReg UsersReg, RegUser regUser, String accessToken) {
+    public static void UserRegStepTest (UsersReg UsersReg) {
         Response response = given()
                 .log().all()
                 .header("Content-type", "application/json")
                 .body(gson.toJson(UsersReg))
                 .when()
                 .post("/api/auth/register");
-        RegUser regUser1 = gson.fromJson(response.getBody().asString(), RegUser.class);
-        String accessToken1 = regUser.getAccessToken();
+        RegUser regUser = gson.fromJson(response.getBody().asString(), RegUser.class);
+        String accessToken = regUser.getAccessToken();
         response.then().log().all();
     }
 
@@ -42,7 +42,7 @@ public class UserOrdersStep {
     }
 
     @Step("Delete User")
-    public static void DeleteUser(UsersReg UsersReg, RegUser regUser, String accessToken) {
+    public static void DeleteUser(UsersReg UsersReg, String accessToken) {
         Response delete = given()
                 .log().all()
                 .header("Content-type", "application/json")
@@ -54,7 +54,7 @@ public class UserOrdersStep {
     }
 
     @Step("Order with auth")
-    public static void OrderWithAuth(RegUser regUser, String accessToken) {
+    public static void OrderWithAuth(String accessToken) {
         String FluorescentBurger = "{\"ingredients\": [\"61c0c5a71d1f82001bdaaa6d\", \"61c0c5a71d1f82001bdaaa6d\"]}";
         Response response = given()
                 .log().all()
@@ -78,7 +78,7 @@ public class UserOrdersStep {
                 .statusCode(200);
     }
     @Step("Order with auth and ingridients")
-    public static void OrderWithAuthAndIngridients (RegUser regUser, String accessToken) {
+    public static void OrderWithAuthAndIngridients (String accessToken) {
         String TheImmortalFluorescentBurger = "{\"ingredients\": [\"61c0c5a71d1f82001bdaaa6d\", \"61c0c5a71d1f82001bdaaa6d\", \"61c0c5a71d1f82001bdaaa6f\", \"61c0c5a71d1f82001bdaaa72\"]}";
         Response response = given()
                 .log().all()
@@ -90,7 +90,7 @@ public class UserOrdersStep {
                 .statusCode(200);
     }
     @Step("Order without ingridients")
-    public static void OrderWithoutIngridients (RegUser regUser, String accessToken) {
+    public static void OrderWithoutIngridients (String accessToken) {
         String TheImmortalFluorescentBurger = "{\"ingredients\":[]}";
         Response response = given()
                 .log().all()
@@ -102,7 +102,7 @@ public class UserOrdersStep {
                 .statusCode(400);
     }
     @Step("Order with invalid hash")
-    public static void OrderWithInvalidHash (RegUser regUser, String accessToken) {
+    public static void OrderWithInvalidHash (String accessToken) {
         String TheImmortalFluorescentBurger = "{\"ingredients\":[\"61c0c5a71d1f82001bdaq212da63\", \"61c0c5a71d1f82001bdaaa62\"]}";
         Response response = given()
                 .log().all()

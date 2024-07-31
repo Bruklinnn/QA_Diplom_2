@@ -10,7 +10,6 @@ import org.junit.Test;
 
 
 public class UserRegTest extends LinkTest {
-    private RegUser regUser;
     private UserRegStep userRegStep;
     private UsersReg usersNewReg;
     private UsersReg usersRegWithoutPassword;
@@ -35,7 +34,7 @@ public class UserRegTest extends LinkTest {
         if (userCreated) {
             String accessToken = userRegStep.UserLoginStepTest(usersNewReg);
             if (accessToken != null) {
-                UserRenameStep.DeleteUser(usersNewReg,regUser,accessToken);
+                UserRenameStep.DeleteUser(usersNewReg,accessToken);
             }
         }
     }
@@ -43,36 +42,36 @@ public class UserRegTest extends LinkTest {
     @Test
     @DisplayName("NewReg")
     public void testUserReg() {
-        userRegStep.UserRegStepTest(usersNewReg, regUser);
+        userRegStep.UserRegStepTest(usersNewReg);
         userCreated = true;
     }
 
     @Test
     @DisplayName("NewRegAndExistingEmail")
     public void testUserRegAndExistingEmail() {
-        userRegStep.UserRegStepTest(usersNewReg, regUser);
-        userRegStep.UserWithExistingEmail(usersNewReg,regUser);
+        userRegStep.UserRegStepTest(usersNewReg);
+        userRegStep.UserWithExistingEmail(usersNewReg);
         userCreated = true;
     }
 
     @Test
     @DisplayName("RegWithoutPassword")
     public void testUserRegWithoutPassword() {
-        userRegStep.UserRegWithoutPassword(usersRegWithoutPassword,regUser);
+        userRegStep.UserRegWithoutPassword(usersRegWithoutPassword);
         System.out.println("Email, password and name are required fields");
     }
 
     @Test
     @DisplayName("RegWithoutEmail")
     public void testUserRegWithoutEmail() {
-        userRegStep.UserRegWithoutEmail(usersRegWithoutEmail,regUser);
+        userRegStep.UserRegWithoutEmail(usersRegWithoutEmail);
         System.out.println("Email, password and name are required fields");
     }
 
     @Test
     @DisplayName("RegWithoutName")
     public void testUserRegWithoutName() {
-        userRegStep.UserRegWithoutName(usersRegWithoutName, regUser);
+        userRegStep.UserRegWithoutName(usersRegWithoutName);
         System.out.println("Email, password and name are required fields");
     }
     }

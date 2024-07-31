@@ -12,7 +12,6 @@ import static Steps.UserRegStep.gson;
 import static io.restassured.RestAssured.given;
 
 public class UserLoginTest extends LinkTest {
-    private RegUser regUser;
     private boolean userCreated;
     private UserLoginStep userLoginStep;
     private UsersReg userBrokenEmail;
@@ -33,7 +32,7 @@ public class UserLoginTest extends LinkTest {
         if (userCreated) {
             String accessToken = userLoginStep.UserLoginStepTest(usersNewReg);
             if (accessToken != null) {
-                UserRenameStep.DeleteUser(usersNewReg, regUser, accessToken);
+                UserRenameStep.DeleteUser(usersNewReg,accessToken);
             }
         }
     }

@@ -1,6 +1,4 @@
 package Steps;
-
-import Body.RegUser;
 import Models.UsersReg;
 import com.google.gson.Gson;
 import io.qameta.allure.Step;
@@ -13,7 +11,7 @@ public class GetUserOrdersStep {
     private static final String ORDER_ENDPOINT = "/api/orders";
 
     @Step("Delete User")
-    public static void DeleteUser (UsersReg UsersReg, RegUser regUser, String accessToken) {
+    public static void DeleteUser (UsersReg UsersReg, String accessToken) {
         Response delete = given()
                 .log().all()
                 .header("Content-type", "application/json")
@@ -25,7 +23,7 @@ public class GetUserOrdersStep {
     }
 
     @Step("User orders with auth")
-    public static void OrdersListWithAuth(RegUser regUser, String accessToken) {
+    public static void OrdersListWithAuth(String accessToken) {
         Response response = given()
                 .log().all()
                 .header("Content-type", "application/json")
@@ -35,7 +33,7 @@ public class GetUserOrdersStep {
                 .statusCode(200);
     }
     @Step("User orders without auth")
-    public static void OrdersListWithoutAuth(RegUser regUser, String accessToken) {
+    public static void OrdersListWithoutAuth() {
         Response response = given()
                 .log().all()
                 .header("Content-type", "application/json")

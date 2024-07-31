@@ -19,67 +19,67 @@ public class UserRegStep {
 
 
     @Step("Create User")
-    public void UserRegStepTest(UsersReg UsersReg, RegUser regUser) {
+    public void UserRegStepTest(UsersReg UsersReg) {
         Response response = given()
                 .log().all()
                 .header("Content-type", "application/json")
                 .body(gson.toJson(UsersReg))
                 .when()
                 .post(REG_ENDPOINT);
-        RegUser regUser1 = gson.fromJson(response.getBody().asString(), RegUser.class);
+        RegUser regUser = gson.fromJson(response.getBody().asString(), RegUser.class);
         String errorMessage = response.jsonPath().getString("message");
         response.then().log().all()
                 .statusCode(200);
     }
 
     @Step("Create User With Existing Email")
-    public void UserWithExistingEmail(UsersReg UsersReg, RegUser regUser) {
+    public void UserWithExistingEmail(UsersReg UsersReg) {
         Response response = given()
                 .log().all()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(UsersReg))
                 .when()
                 .post("/api/auth/register");
-        RegUser regUser1 = gson.fromJson(response.getBody().asString(), RegUser.class);
+        RegUser regUser = gson.fromJson(response.getBody().asString(), RegUser.class);
         String errorMessage = response.jsonPath().getString("message");
         response.then().log().all()// Логирование всего ответа
         .statusCode(403);
     }
     @Step("Create User Without Password")
-    public void UserRegWithoutPassword(UsersReg UsersReg,RegUser regUser) {
+    public void UserRegWithoutPassword(UsersReg UsersReg) {
         Response response = given()
                 .log().all()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(UsersReg))
                 .when()
                 .post("/api/auth/register");
-        RegUser regUser1 = gson.fromJson(response.getBody().asString(), RegUser.class);
+        RegUser regUser = gson.fromJson(response.getBody().asString(), RegUser.class);
         String errorMessage = response.jsonPath().getString("message");
         response.then().log().all()// Логирование всего ответа
                 .statusCode(403);
     }
     @Step("Create User Without Email")
-    public void UserRegWithoutEmail(UsersReg UsersReg,RegUser regUser) {
+    public void UserRegWithoutEmail(UsersReg UsersReg) {
         Response response = given()
                 .log().all()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(UsersReg))
                 .when()
                 .post("/api/auth/register");
-        RegUser regUser1 = gson.fromJson(response.getBody().asString(), RegUser.class);
+        RegUser regUser = gson.fromJson(response.getBody().asString(), RegUser.class);
         String errorMessage = response.jsonPath().getString("message");
         response.then().log().all()// Логирование всего ответа
                 .statusCode(403);
     }
     @Step("Create User Without Name")
-    public void UserRegWithoutName(UsersReg UsersReg,RegUser regUser) {
+    public void UserRegWithoutName(UsersReg UsersReg) {
         Response response = given()
                 .log().all()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(UsersReg))
                 .when()
                 .post("/api/auth/register");
-        RegUser regUser1 = gson.fromJson(response.getBody().asString(), RegUser.class);
+        RegUser regUser = gson.fromJson(response.getBody().asString(), RegUser.class);
         String errorMessage = response.jsonPath().getString("message");
         response.then().log().all()// Логирование всего ответа
                 .statusCode(403);
