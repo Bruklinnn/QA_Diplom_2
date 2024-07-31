@@ -1,6 +1,5 @@
 import Body.RegUser;
 import Models.UsersReg;
-import Steps.UserLoginStep;
 import Steps.UserRegStep;
 import Steps.UserRenameStep;
 import io.qameta.allure.junit4.DisplayName;
@@ -8,7 +7,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static io.restassured.RestAssured.given;
 
 
 public class UserRegTest extends LinkTest {
@@ -18,7 +16,6 @@ public class UserRegTest extends LinkTest {
     private UsersReg usersRegWithoutPassword;
     private UsersReg usersRegWithoutEmail;
     private UsersReg usersRegWithoutName;
-    private String accessToken;
     private boolean userCreated;
 
 

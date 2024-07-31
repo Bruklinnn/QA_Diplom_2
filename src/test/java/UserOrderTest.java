@@ -10,12 +10,9 @@ import static Steps.UserRegStep.gson;
 import static io.restassured.RestAssured.given;
 
 public class UserOrderTest extends LinkTest {
-    private UserOrdersStep userOrdersStep;
     private RegUser regUser;
     private UsersReg userForOrder;
-    private String accessToken;
     private boolean userCreated;
-    private String TheImmortalFluorescentBurger;
 
 
     @Before
