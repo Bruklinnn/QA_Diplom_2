@@ -1,4 +1,3 @@
-import Body.RegUser;
 import Models.UsersReg;
 import Steps.UserLoginStep;
 import Steps.UserRenameStep;
